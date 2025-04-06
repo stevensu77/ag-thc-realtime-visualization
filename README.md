@@ -104,13 +104,12 @@ The application connects to WebSocket endpoints at `ws://127.0.0.1:8000/producer
    - Controlled memory usage
    - Optimized WebSocket connections
 
-## 🤝 Contributing
+## Next Step
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
+1. Use RXJS to help optimize the data steam handling
+2. Add feature to toggle each of the Producer stream updating
+3. Add unit testing
+
 
 ## 📝 License
 
