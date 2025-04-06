@@ -1,54 +1,123 @@
-# React + TypeScript + Vite
+# Real-time Data Visualization Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance real-time data visualization dashboard built with React, TypeScript, Bootstrap. This application demonstrates efficient handling of real-time data streams with optimized rendering and worker-based computations.
 
-Currently, two official plugins are available:
+## 🚀 Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** - For building the user interface
+- **TypeScript** - For type safety and better developer experience
+- **Highcharts** - For performant data visualization
+- **Web Workers** - For off-main-thread computations
+- **WebSocket** - For real-time data streaming
+- **Bootstrap** - For responsive layout and UI components
 
-## Expanding the ESLint configuration
+## 🏗️ Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Data Flow
+1. WebSocket connections receive real-time data from multiple producers
+2. RxJS streams process and optimize data updates:
+   - `bufferTime(100)` - Batches updates every 100ms
+   - `throttleTime(16)` - Limits updates to ~60fps
+   - Separate streams for data and insights
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Performance Optimizations
+- Web Worker for data processing
+- Efficient data filtering and calculations
+- Optimized Highcharts configuration
+- Throttled UI updates
+- Batched data processing
+
+### Components
+- **Chart**: Real-time line chart with zooming capabilities
+- **DataInsightsPanel**: Statistical insights for each data producer
+- **TimeRangeSelector**: Time window selection controls
+
+## 📊 Features
+
+- Real-time data visualization
+- Multiple data producers support
+- Statistical insights (min, max, average)
+- Adjustable time windows (30s, 1m, 5m)
+- Zoom and pan capabilities
+- Responsive design
+- Performance optimized
+
+## 🛠️ Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── Chart.tsx
+│   ├── DataInsightsPanel.tsx
+│   └── TimeRangeSelector.tsx
+├── services/           # Data handling services
+│   └── dataService.ts
+├── workers/            # Web Workers
+│   └── dataWorker.ts
+├── types/             # TypeScript types
+│   └── data.ts
+└── App.tsx           # Main application component
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚦 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## 🔧 Configuration
+
+The application connects to WebSocket endpoints at `ws://127.0.0.1:8000/producer/{id}`. Each producer sends data points containing:
+- Timestamp
+- Numerical value
+
+## 🎯 Key Implementation Details
+
+
+### Web Worker Processing
+
+
+### Highcharts Configuration
+- Optimized for real-time updates
+- Disabled unnecessary animations
+- Configured for performance
+
+## 📈 Performance Considerations
+
+1. **Data Management**
+   - Limited history to 20000 points per producer
+   - Efficient data structure updates
+   - Batched state updates
+
+2. **Rendering Optimization**
+   - Memoized chart options
+   - Throttled UI updates
+   - Efficient data filtering
+
+3. **Resource Usage**
+   - Web Worker for heavy computations
+   - Controlled memory usage
+   - Optimized WebSocket connections
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📝 License
+
+MIT License - feel free to use this project for learning or as a starting point for your own applications.
