@@ -13,12 +13,6 @@ A high-performance real-time data visualization dashboard built with React, Type
 
 ## 🏗️ Architecture
 
-### Data Flow
-1. WebSocket connections receive real-time data from multiple producers
-2. RxJS streams process and optimize data updates:
-   - `bufferTime(100)` - Batches updates every 100ms
-   - `throttleTime(16)` - Limits updates to ~60fps
-   - Separate streams for data and insights
 
 ### Performance Optimizations
 - Web Worker for data processing
